@@ -56,10 +56,10 @@
                             <i class="fs-4 bi-credit-card"></i> <span class="ms-1 d-none d-sm-inline">Payments</span></a>
                         <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
                             <li class="w-100">
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 1</a>
+                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Subscriptions</span> </a>
                             </li>
                             <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2</a>
+                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Billing History</span> </a>
                             </li>
                         </ul>
                     </li>
