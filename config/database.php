@@ -16,7 +16,6 @@ return [
     */
 
     'default' => env('DB_CONNECTION', 'mysql'),
-
     /*
     |--------------------------------------------------------------------------
     | Database Connections
@@ -61,6 +60,16 @@ return [
             'options' => extension_loaded('pdo_mysql') ? array_filter([
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
+        ],
+
+        'opensolar' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST_opensolar'),
+            'port' => env('DB_PORT_opensolar'),
+            'database' => env('DB_DATABASE_opensolar'),
+            'username' => env('DB_USERNAME_opensolar'),
+            'password' => env('DB_PASSWORD_opensolar'),
+            'charset' => 'utf8mb4',
         ],
 
         'pgsql' => [
@@ -123,7 +132,7 @@ return [
 
         'options' => [
             'cluster' => env('REDIS_CLUSTER', 'redis'),
-            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_database_'),
+            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_') . '_database_'),
         ],
 
         'default' => [
