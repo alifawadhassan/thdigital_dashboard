@@ -1,5 +1,5 @@
 <?php
-echo "<script>var stats_opensolar = '" . $stats_opensolar . "'</script>";
+echo "<script>var subscription_status_opensolar = '" . $subscription_status_opensolar . "'</script>";
 ?>
 
 @extends('layouts.app')
@@ -49,7 +49,7 @@ echo "<script>var stats_opensolar = '" . $stats_opensolar . "'</script>";
     window.onload = function abc() {
 
         var div_open_solar = document.getElementById("div_open_solar");
-        if (stats_opensolar == "Yes") {
+        if (subscription_status_opensolar == "Yes") {
             div_open_solar.innerHTML = '<a href="" class="btn btn-primary">Installed</a>';
         } else {
             div_open_solar.innerHTML = '<a href="https://thdigital.au/opensolar_app/install/"  class="btn btn-primary">Starting at $199.00/mo</a>';

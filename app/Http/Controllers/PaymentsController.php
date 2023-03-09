@@ -54,6 +54,12 @@ class PaymentsController extends Controller
 
     public function showBillingHistory()
     {
+        $stripe = new \Stripe\StripeClient(
+            'sk_test_4eC39HqLyjWDarjtT1zdp7dc'
+          );
+          $stripe->customers->allBalanceTransactions(
+            'cus_4QFOF3xrvBT2nU'
+          );
         //
         return view('payments.billingHistory');
         // return DB::connection('opensolar')->table('users')->get();

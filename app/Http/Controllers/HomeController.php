@@ -25,16 +25,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-
+        //  Getting Current User Email
         $auth_email = Auth::user()->email;
-        $stats_opensolar = DB::connection('opensolar')->table('users')->where('hubspot_email', "=", $auth_email)->get('subscribed');
-        if ($stats_opensolar[0]->subscribed == "Yes") {
-            return view('home', ['stats_opensolar' => $stats_opensolar[0]->subscribed]); // '<a href="" id="123_stat" class="btn btn-primary">Installed</a>']);
+
+        //  Cheking That Email in OpenSolar User Table and check its subscription
+        $subscription_status_opensolar = DB::connection('opensolar')->table('users')->where('hubspot_email', "=", $auth_email)->get('subscribed');
+
+        //  If Subscription is yes we show Installed on App otherwise we show Payment Link
+        if ($subscription_status_opensolar[0]->subscribed == "Yes") {
+            return view('home', ['subscription_status_opensolar' => $subscription_status_opensolar[0]->subscribed]);
 
         } else {
-            return view('home', ['stats_opensolar' => $stats_opensolar[0]->subscribed]); // '<a href="https://www.google.com/" id="123_stat" class="btn btn-primary">Starting at $199.00/mo</a>']);
+            return view('home', ['subscription_status_opensolar' => $subscription_status_opensolar[0]->subscribed]);
         }
-        // return view('home', ['stats' => $stats]);
-        // echo $stats_opensolar[0]->subscribed;
     }
 }
