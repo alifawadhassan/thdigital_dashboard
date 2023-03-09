@@ -30,6 +30,17 @@
                         <td>file</td>
                     </tr>
 
+                    {{ $data }}
+
+                    <!-- @foreach($data as $user)
+                    <tr>
+                    <th scope="row">{{$user->id}}</th>
+                    <td>{{$user->firstname}}</td>
+                    <td>{{$user->created}}</td>
+                    <td>{{$user->email}}</td>
+                    </tr>
+                    @endforeach -->
+
                 </tbody>
 
             </table>

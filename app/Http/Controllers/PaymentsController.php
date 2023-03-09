@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -54,17 +57,25 @@ class PaymentsController extends Controller
 
     public function showBillingHistory()
     {
-        $stripe = new \Stripe\StripeClient(
-            'sk_test_4eC39HqLyjWDarjtT1zdp7dc'
-          );
-          $stripe->customers->allBalanceTransactions(
-            'cus_4QFOF3xrvBT2nU'
-          );
-        //
-        return view('payments.billingHistory');
-        // return DB::connection('opensolar')->table('users')->get();
+        $stripe = new \Stripe\StripeClient('sk_test_51GjYsRKEh3EHlbgxuhNFELRXuKopzLDnA60MJFnD7RyErG6h5N00jtXgAtFZxKOxk4J7C5Mh0CGwlcracQzO5yVz00xLcuyp49');
 
+        //  Getting Current User Email
+        $auth_email = Auth::user()->email;
+
+        //  Cheking That Email in OpenSolar User Table and check client subscription id
+        $subscription_id_opensolar = DB::connection('opensolar')->table('users')->where('hubspot_email', "=", $auth_email)->get('stripe_customer_id');
+
+        $response = $stripe->customers->allBalanceTransactions(
+            $subscription_id_opensolar
+        );
+        //
+        
+        return view('payments.billingHistory', ["data" => $response->data]);
+        // echo $response;
     }
+
+
+
 
     /**
      * Show the form for editing the specified resource.
