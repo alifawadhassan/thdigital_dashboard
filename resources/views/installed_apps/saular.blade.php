@@ -38,7 +38,7 @@ echo "<script>var subscribed = '" . $subscribed . "'</script>";
                            
                             <span class="lead">Do you want to create deals for all new projects created in Open Solar?                            </span>
                             <div class="form-check form-switch position-absolute top-50 end-0">
-                                <input id="want_deals" class="form-check-input" type="checkbox" >
+                                <input id="want_deals" onchange="update_want_deals()" class="form-check-input" type="checkbox" >
                             </div>
                     </div>
                 </div>
@@ -52,7 +52,7 @@ echo "<script>var subscribed = '" . $subscribed . "'</script>";
                         </h4>    
                             <span class="lead">Choose a Deal Stage in Hubspot for all your projects.</span>
                             <div class="position-absolute top-50 end-0">
-                                <select id="deal_stage" class="form-select" aria-label="Default select example">
+                                <select onchange="update_deal_stage()" id="deal_stage" class="form-select" aria-label="Default select example">
                                     <option value="selectanoption">Select an Option</option>
                                     <option value="appointmentscheduled">Appointment scheduled</option>
                                     <option value="qualifiedtobuy">Qualified to buy</option>
@@ -76,7 +76,7 @@ echo "<script>var subscribed = '" . $subscribed . "'</script>";
                         </h4>
                             <span class="lead">Do you want to create contacts in Open Solar for all new contacts created in HubSpot?</span>
                             <div class="form-check form-switch position-absolute top-50 end-0">
-                                <input class="form-check-input" type="checkbox" id="want_contacts" >
+                                <input onchange="update_want_contacts()" class="form-check-input" type="checkbox" id="want_contacts" >
                             </div>
                     </div>
                 </div>
@@ -140,5 +140,101 @@ echo "<script>var subscribed = '" . $subscribed . "'</script>";
         }else{
             document.getElementById("subscribed").checked = false ;
         }
+    }
+
+    // 
+    // -----------------------------------------------
+    // 
+    function update_want_deals()
+    {
+      var temp_inputValue = document.getElementById("want_deals").checked;
+
+      if(temp_inputValue == true)
+      {
+        inputValue = "Yes"
+      }else{
+        inputValue = "No"
+      }
+
+
+      var url = '{{ route('update_want_deals') }}';
+
+
+      // Send an Ajax request to the update-my-input route
+      $.ajax({
+        url: url,
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+        method: 'POST',
+        data: {
+          value: inputValue
+        },
+        success: function(response) {
+          console.log(response);
+        },
+        error: function(xhr, status, error) {
+          console.log(error);
+        }
+      });
+    }
+
+
+    // 
+    // -----------------------------------------------
+    // 
+    function update_deal_stage()
+    {
+      var inputValue  = document.getElementById("deal_stage").value;
+      var url = '{{ route('update_deal_stage') }}';
+
+      // Send an Ajax request to the update-my-input route
+      $.ajax({
+        url: url,
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+        method: 'POST',
+        data: {
+          value: inputValue
+        },
+        success: function(response) {
+          console.log(response);
+        },
+        error: function(xhr, status, error) {
+          console.log(error);
+        }
+      });
+    }
+
+
+
+    // 
+    // ---------------------------------------------------
+    // 
+    function update_want_contacts()
+    {
+      var temp_inputValue = document.getElementById("want_contacts").checked;
+
+      if(temp_inputValue == true)
+      {
+        inputValue = "Yes"
+      }else{
+        inputValue = "No"
+      }
+
+      var url = '{{ route('update_want_contacts') }}';
+
+      // Send an Ajax request to the update-my-input route
+      $.ajax({
+        url: url,
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+        method: 'POST',
+        data: {
+          value: inputValue
+        },
+        success: function(response) {
+          console.log(response);
+        },
+        error: function(xhr, status, error) {
+          console.log(error);
+        }
+      });
     }
 </script>
