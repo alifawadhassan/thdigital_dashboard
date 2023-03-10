@@ -43,7 +43,6 @@ class HomeController extends Controller
                 'subscription_status_opensolar' => "Yes",
                 'hide_show_opensolar_div' => $hide_show_opensolar_div
             ]);
-
         } else {
             return view('home', [
                 'subscription_status_opensolar' => "No",
@@ -51,11 +50,5 @@ class HomeController extends Controller
 
             ]);
         }
-    }
-
-    public function saular()
-    {
-        return view('installed_apps.saular');
-
     }
 }

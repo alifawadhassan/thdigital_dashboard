@@ -74,7 +74,6 @@ class PaymentsController extends Controller
                 'change_plan_link_opensolar' => "",
                 'hubspot_status_opensolar' => $hubspot_status_opensolar
             ]);
-
         } else {
             return view('payments.subscriptions', [
                 'current_plan_opensolar' => "Inactivated",
@@ -83,8 +82,6 @@ class PaymentsController extends Controller
                 'hubspot_status_opensolar' => $hubspot_status_opensolar
             ]);
         }
-
-
     }
 
 
