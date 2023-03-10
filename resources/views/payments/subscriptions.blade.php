@@ -27,8 +27,8 @@
                             <tr>
 
                                 <td>Current Plan</td>
-                                <td>Pro</td>
-                                <td><a href="">Change Plan</a></td>
+                                <td>{{ $current_plan_opensolar }}</td>
+                                <td><a href="{{ $change_plan_link_opensolar }}">{{ $change_plan_text_opensolar }}</a></td>
                             </tr>
                             <tr>
                                 <td>Billing</td>
@@ -36,7 +36,7 @@
                             </tr>
                             <tr>
                                 <td>HubSpot Status</td>
-                                <td>Connected</td>
+                                <td>{{ $hubspot_status_opensolar }}</td>
                             </tr>
                         </tbody>
                     </table>

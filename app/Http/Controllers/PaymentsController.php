@@ -50,8 +50,41 @@ class PaymentsController extends Controller
      */
     public function showSubscriptions()
     {
-        //
-        return view('payments.subscriptions');
+
+        //  Getting Current User Email
+        $auth_email = Auth::user()->email;
+
+        //  Cheking That Email in OpenSolar User Table and check its subscription
+        $subscription_status_opensolar = DB::connection('opensolar')->table('users')->where('hubspot_email', "=", $auth_email)->get('subscribed');
+
+        $hubspot_status_opensolar = "";
+        $temp_hubspot_status_opensolar = DB::connection('opensolar')->table('users')->where('hubspot_email', "=", $auth_email)->get();
+
+        if ($temp_hubspot_status_opensolar) {
+            $hubspot_status_opensolar = "Connected";
+        } else {
+            $hubspot_status_opensolar = "Not Connected";
+        }
+
+        //  If Subscription is yes we show Installed on App otherwise we show Payment Link
+        if ($subscription_status_opensolar[0]->subscribed == "Yes") {
+            return view('payments.subscriptions', [
+                'current_plan_opensolar' => "Activated",
+                'change_plan_text_opensolar' => "",
+                'change_plan_link_opensolar' => "",
+                'hubspot_status_opensolar' => $hubspot_status_opensolar
+            ]);
+
+        } else {
+            return view('payments.subscriptions', [
+                'current_plan_opensolar' => "Inactivated",
+                'change_plan_text_opensolar' => "Change Plan",
+                'change_plan_link_opensolar' => "https://buy.stripe.com/7sI8Aq5c20xea4M006",
+                'hubspot_status_opensolar' => $hubspot_status_opensolar
+            ]);
+        }
+
+
     }
 
 
@@ -69,7 +102,7 @@ class PaymentsController extends Controller
             $subscription_id_opensolar
         );
         //
-        
+
         return view('payments.billingHistory', ["data" => $response->data]);
         // echo $response;
     }

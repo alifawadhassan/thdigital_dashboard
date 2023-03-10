@@ -21,5 +21,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/installed_apps/saular', [App\Http\Controllers\HomeController::class, 'saular'])->name('saular');
+
 Route::get('/subscription', [App\Http\Controllers\PaymentsController::class, 'showSubscriptions'])->name("subscription");
 Route::get('/billing_history', [App\Http\Controllers\PaymentsController::class, 'showBillingHistory'])->name("billing_history");

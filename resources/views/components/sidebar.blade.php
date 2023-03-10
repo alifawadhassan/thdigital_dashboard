@@ -4,6 +4,9 @@
                     <span class="fs-5 d-none d-sm-inline">Menu</span>
                 </a>
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                    <!--  -->
+                    <!-- ALL APPS AVAILABLE -->
+                    <!--  -->
                     <li class="nav-item">
                         <span class="text-muted">All APPS</span>
                         <hr>
@@ -11,51 +14,42 @@
                             <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">View All Apps</span>
                         </a>
                     </li>
+
+                    <!--  -->
+                    <!-- MY INSTALLED APPS -->
+                    <!--  -->
                     <li>
                         <span class="text-muted">MY APPS</span>
                         <hr>
                         <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
                             <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">My Installed Apps</span> </a>
                         <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
-                            <li class="w-100">
-                                <!-- <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Saular</span> </a> -->
-                                <!--  -->
-                                <!--  -->
-                                <!-- Example single danger button -->
-                                <div class="btn-group">
-                                <a><span  class=" dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Saular</span> </a>
-                                    <!-- <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Saular
-                                    </button> -->
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Summary</a></li>
-                                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    </ul>
-                                </div>
-                                <!--  -->
-                                <!--  -->
-                            </li>
-                            <li class="mt-2">
-                                <!-- <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Saular</span> </a> -->
-                                <!--  -->
-                                <!--  -->
-                                <!-- Example single danger button -->
-                                <div class="btn-group">
-                                <a><span  class=" dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Notes</span> </a>
 
-                                    <!-- <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Notes
-                                    </button> -->
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Summary</a></li>
-                                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    </ul>
+                            <!--  -->
+                            <li class="w-100">
+                                <div id="hide_show_opensolar_div" class="btn-group">
+                                    <a href="{{ route('saular') }}">
+                                        <i class="fs-4 bi-sun"></i> <span class="ms-1 d-none d-sm-inline">Saular</span> </a>
+                                    </a>
                                 </div>
-                                <!--  -->
-                                <!--  -->
+                            </li>
+
+
+                            <!--  -->
+                            <li class="mt-2">
+
+                                <div id="hide_show_opensolar_div" class="btn-group">
+                                    <a href="{{ route('saular') }}">
+                                        <i class="fs-4 bi-file-earmark-medical"></i> <span class="ms-1 d-none d-sm-inline">Notes</span> </a>
+                                    </a>
+                                </div>
                             </li>
                         </ul>
                     </li>
+
+                    <!--  -->
+                    <!-- PAYMENTS -->
+                    <!--  -->
 
                     <li>
                         <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
@@ -70,6 +64,9 @@
                         </ul>
                     </li>
 
+                    <!--  -->
+                    <!-- SUPPORT -->
+                    <!--  -->
                     <li>
                         <span class="text-muted">SUPPORT</span>
                         <hr>

@@ -1,5 +1,7 @@
 <?php
 echo "<script>var subscription_status_opensolar = '" . $subscription_status_opensolar . "'</script>";
+echo "<script>var hide_show_opensolar_div = '" . $hide_show_opensolar_div . "'</script>";
+
 ?>
 
 @extends('layouts.app')
@@ -54,5 +56,10 @@ echo "<script>var subscription_status_opensolar = '" . $subscription_status_open
         } else {
             div_open_solar.innerHTML = '<a href="https://thdigital.au/opensolar_app/install/"  class="btn btn-primary">Starting at $199.00/mo</a>';
         }
+
+        // Hide and Show 
+        if (hide_show_opensolar_div == "none") {
+            document.getElementById("hide_show_opensolar_div").style.display = 'none';
+        } 
     }
 </script>
