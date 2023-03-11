@@ -33,4 +33,47 @@ class SaularController extends Controller
             "subscribed" => $subscribed[0]->subscribed
         ]);
     }
+
+    function update_want_deals(Request $request)
+    {
+        $newValue = $request->input('value');
+
+        //  Getting Current User Email
+        $auth_email = Auth::user()->email;
+
+        // Update the value of the input field in the database
+        $temp = DB::connection('opensolar')->table('users')->where('hubspot_email', "=", $auth_email)->update(['want_deals' => $newValue]);
+
+        // return $temp;
+        return response()->json(['saular_session' => 'success']);
+    }
+
+
+    function update_want_contacts(Request $request)
+    {
+        $newValue = $request->input('value');
+
+        //  Getting Current User Email
+        $auth_email = Auth::user()->email;
+
+        // Update the value of the input field in the database
+        $temp = DB::connection('opensolar')->table('users')->where('hubspot_email', "=", $auth_email)->update(['want_contacts' => $newValue]);
+
+        return response()->json(['saular_session' => 'success']);
+    }
+
+
+    function update_deal_stage(Request $request)
+    {
+        $newValue = $request->input('value');
+
+        //  Getting Current User Email
+        $auth_email = Auth::user()->email;
+
+        // Update the value of the input field in the database
+        $temp = DB::connection('opensolar')->table('users')->where('hubspot_email', "=", $auth_email)->update(['deal_stage' => $newValue]);
+
+        return $temp;
+        return response()->json(['saular_session' => 'success']);
+    }
 }

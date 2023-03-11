@@ -2,8 +2,9 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\PaymentsController;
+use App\Http\Controllers\SaularController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,59 +23,35 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/installed_apps/saular', [App\Http\Controllers\SaularController::class, 'show'])->name('saular');
-
-Route::get('/subscription', [App\Http\Controllers\PaymentsController::class, 'showSubscriptions'])->name("subscription");
-Route::get('/billing_history', [App\Http\Controllers\PaymentsController::class, 'showBillingHistory'])->name("billing_history");
 
 // 
-// Update Saular Input Fields setting
 // 
-Route::post('/update_want_deals', function (Request $request) {
-    $newValue = $request->input('value');
-
-    //  Getting Current User Email
-    $auth_email = Auth::user()->email;
-
-    // Update the value of the input field in the database
-    $temp = DB::connection('opensolar')->table('users')->where('hubspot_email', "=", $auth_email)->update(['want_deals' => $newValue]);
-
-    return $temp;
-    // return response()->json(['status' => 'success']);
-})->name('update_want_deals');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
 // 
-// Update Saular Input Fields setting
-// 
-Route::post('/update_want_contacts', function (Request $request) {
-    $newValue = $request->input('value');
-
-    //  Getting Current User Email
-    $auth_email = Auth::user()->email;
-
-    // Update the value of the input field in the database
-    $temp = DB::connection('opensolar')->table('users')->where('hubspot_email', "=", $auth_email)->update(['want_contacts' => $newValue]);
-
-    return $temp;
-    // return response()->json(['status' => 'success']);
-})->name('update_want_contacts');
-
+Route::get('/subscription', [PaymentsController::class, 'showSubscriptions'])->name("subscription");
+Route::get('/billing_history', [PaymentsController::class, 'showBillingHistory'])->name("billing_history");
 
 
 // 
-// Update Saular Input Fields setting
+// SHOW USER PREVIOUS SELECTED SETTING ON SAULAR
 // 
-Route::post('/update_deal_stage', function (Request $request) {
-    $newValue = $request->input('value');
+Route::get('/installed_apps/saular', [SaularController::class, 'show'])->name('saular');
 
-    //  Getting Current User Email
-    $auth_email = Auth::user()->email;
+// 
+// Update Saular Input Fields setting ( WANT DEALS STATUS )
+// 
+Route::post('/update_want_deals', [SaularController::class, 'update_want_deals'])->name('update_want_deals');
 
-    // Update the value of the input field in the database
-    $temp = DB::connection('opensolar')->table('users')->where('hubspot_email', "=", $auth_email)->update(['deal_stage' => $newValue]);
 
-    return $temp;
-    // return response()->json(['status' => 'success']);
-})->name('update_deal_stage');
+// 
+// Update Saular Input Fields setting ( WANT contact STATUS )
+// 
+Route::post('/update_want_contacts', [SaularController::class, 'update_want_contacts'])->name('update_want_contacts');
+
+
+// 
+// Update Saular Input Fields setting (  DEAL STAGE STATUS )
+// 
+Route::post('/update_deal_stage', [SaularController::class, 'update_deal_stage'])->name('update_deal_stage');

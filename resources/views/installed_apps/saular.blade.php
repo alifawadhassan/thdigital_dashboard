@@ -5,9 +5,7 @@ echo "<script>var deal_stage = '" . $deal_stage . "'</script>";
 echo "<script>var subscribed = '" . $subscribed . "'</script>";
 ?>
 
-
 @extends('layouts.app')
-
 @section('content')
 
 <div class="container-fluid">
@@ -18,6 +16,11 @@ echo "<script>var subscribed = '" . $subscribed . "'</script>";
             <!--  -->
 
             <h1 class="mb-3 display-6 text-primary">Saular Setting Page</h1>
+
+
+            @if(session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+            @endif
 
             <div class="mt-2">
                 <!--  -->
@@ -38,7 +41,14 @@ echo "<script>var subscribed = '" . $subscribed . "'</script>";
                            
                             <span class="lead">Do you want to create deals for all new projects created in Open Solar?                            </span>
                             <div class="form-check form-switch position-absolute top-50 end-0">
-                                <input id="want_deals" onchange="update_want_deals()" class="form-check-input" type="checkbox" >
+                            
+                                <div class="d-flex">
+                                  No
+                                  <div class="form-switch ms-2">
+                                    <input id="want_deals" onchange="update_want_deals()" class="form-check-input" type="checkbox" >
+                                  </div>
+                                  <label for="site_state" class="form-check-label">Yes</label>
+                                </div>
                             </div>
                     </div>
                 </div>
@@ -75,8 +85,15 @@ echo "<script>var subscribed = '" . $subscribed . "'</script>";
                             <b>Create Contacts in OpenSolar</b> 
                         </h4>
                             <span class="lead">Do you want to create contacts in Open Solar for all new contacts created in HubSpot?</span>
+                            {{--  --}}
                             <div class="form-check form-switch position-absolute top-50 end-0">
-                                <input onchange="update_want_contacts()" class="form-check-input" type="checkbox" id="want_contacts" >
+                                <div class="d-flex">
+                                  No
+                                  <div class="form-switch ms-2">
+                                    <input onchange="update_want_contacts()" class="form-check-input" type="checkbox" id="want_contacts" >
+                                  </div>
+                                  <label for="site_state" class="form-check-label">Yes</label>
+                                </div>
                             </div>
                     </div>
                 </div>
@@ -89,8 +106,16 @@ echo "<script>var subscribed = '" . $subscribed . "'</script>";
                             <b>Subscription Status with Saular:</b> 
                         </h4>
                             <span class="lead">Active / Cancelled</span>
+
+                            {{--  --}}
                             <div class="form-check form-switch position-absolute top-50 end-0" title="Please get in touch on our support page ( https://www.thrive-digital.com.au/saular-support )">
-                                <input class="form-check-input" type="checkbox" id="subscribed" disabled>
+                                <div class="d-flex">
+                                  Cancelled
+                                  <div class="form-switch ms-2">
+                                    <input class="form-check-input" type="checkbox" id="subscribed" disabled>
+                                  </div>
+                                  <label for="site_state" class="form-check-label">Active</label>
+                                </div>
                             </div>
                     </div>
                 </div>
@@ -105,6 +130,10 @@ echo "<script>var subscribed = '" . $subscribed . "'</script>";
 
 
 <script>
+  
+    // 
+    // -----------------------------------------------
+    // 
     window.onload = function abc() {
 
         //  Update the value of Want deals using the data from database
@@ -169,12 +198,22 @@ echo "<script>var subscribed = '" . $subscribed . "'</script>";
           value: inputValue
         },
         success: function(response) {
-          console.log(response);
+        
+          if(temp_inputValue == true)
+      {
+        alert('Now Deals will create in HubSpot for OpenSolar Projects!');
+      }else{
+        alert('Now Deals will not create in HubSpot for OpenSolar Projects!');
+      }
+
+          // console.log(response);
+          //  saular_session  = response['saular_session'];
         },
         error: function(xhr, status, error) {
           console.log(error);
         }
       });
+
     }
 
 
@@ -195,14 +234,17 @@ echo "<script>var subscribed = '" . $subscribed . "'</script>";
           value: inputValue
         },
         success: function(response) {
-          console.log(response);
+          // console.log(response);
+          // saular_session  = response['saular_session'];
+          alert("Deal Stage in Hubspot for all your projects is updated successfully!");
         },
         error: function(xhr, status, error) {
           console.log(error);
         }
       });
-    }
+      document.getElementById("saular_session").innerHTML  = saular_session;
 
+    }
 
 
     // 
@@ -210,6 +252,7 @@ echo "<script>var subscribed = '" . $subscribed . "'</script>";
     // 
     function update_want_contacts()
     {
+  
       var temp_inputValue = document.getElementById("want_contacts").checked;
 
       if(temp_inputValue == true)
@@ -230,11 +273,24 @@ echo "<script>var subscribed = '" . $subscribed . "'</script>";
           value: inputValue
         },
         success: function(response) {
-          console.log(response);
+          // console.log(response);
+            // saular_session  = response['saular_session'];
+
+            if(temp_inputValue == true)
+      {
+        alert('New contacts will create in Open Solar for new Contacts in HubSpot!');
+      }else{
+        alert('New contacts will not create in Open Solar for new Contacts in HubSpot!');
+      }
+            
         },
         error: function(xhr, status, error) {
           console.log(error);
         }
       });
+
     }
+
+
+
 </script>
