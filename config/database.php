@@ -72,6 +72,18 @@ return [
             'charset' => 'utf8mb4',
         ],
 
+
+        'notes' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST_notes'),
+            'port' => env('DB_PORT_notes'),
+            'database' => env('DB_DATABASE_notes'),
+            'username' => env('DB_USERNAME_notes'),
+            'password' => env('DB_PASSWORD_notes'),
+            'charset' => 'utf8mb4',
+        ],
+
+
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),

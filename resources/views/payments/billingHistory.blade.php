@@ -18,7 +18,6 @@
                         <th scope="col">Product</th>
                         <th scope="col">Amount</th>
                         <th scope="col">Date</th>
-                        <th scope="col">Invoice</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,19 +26,8 @@
                         <td>Saular</td>
                         <td>50$</td>
                         <td>7-3-2023</td>
-                        <td>file</td>
                     </tr>
 
-                    {{ $data }}
-
-                    <!-- @foreach($data as $user)
-                    <tr>
-                    <th scope="row">{{$user->id}}</th>
-                    <td>{{$user->firstname}}</td>
-                    <td>{{$user->created}}</td>
-                    <td>{{$user->email}}</td>
-                    </tr>
-                    @endforeach -->
 
                 </tbody>
 

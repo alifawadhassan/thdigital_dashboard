@@ -1,3 +1,40 @@
+<?php
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
+ //  Getting Current User Email
+ $auth_email = Auth::user()->email;
+
+ // 
+ // -----------------------------OPENSOLAR----------------
+ //
+
+ //  Check if user Email Exist in Our DB then show this app on his portal
+ $hide_show_opensolar_div = "";
+ $temp_hide_show_opensolar_div = DB::connection('opensolar')->table('users')->where('hubspot_email', "=", $auth_email)->get();
+ if (count($temp_hide_show_opensolar_div)==0) {
+     $hide_show_opensolar_div = "none";
+ }
+
+
+
+ // 
+ // -----------------------------NOTES----------------
+ // 
+ //  Check if user Email Exist in Our DB then show this app on his portal
+
+ $hide_show_notes_div = "";
+ $temp_hide_show_notes_div = DB::connection('notes')->table('users')->where('email', "=", $auth_email)->get();
+ // return $temp_hide_show_notes_div;
+ if (count($temp_hide_show_notes_div) == 0) {
+     $hide_show_notes_div = "none";
+ }
+
+
+?>
+
+
+
 <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
             <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                 <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
@@ -25,25 +62,35 @@
                             <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">My Installed Apps</span> </a>
                         <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
 
-                            <!--  -->
-                            <li class="w-100">
-                                <div id="hide_show_opensolar_div" class="btn-group">
-                                    <a href="{{ route('saular') }}">
-                                        <i class="fs-4 bi-sun"></i> <span class="ms-1 d-none d-sm-inline">Saular</span> </a>
-                                    </a>
-                                </div>
-                            </li>
+<?php  
+    if($hide_show_opensolar_div != "none"){
+?>
+    <li class="w-100">
+        <div id="hide_show_opensolar_div" class="btn-group">
+           <a href="{{ route('saular') }}">
+            <i class="fs-4 bi-sun"></i> <span class="ms-1 d-none d-sm-inline">Saular</span> </a>
+            </a>
+        </div>
+    </li>
+<?php
+    }
+?>
+
+<?php 
+    if($hide_show_notes_div !="none"){
+?>
+    <li class="mt-2">
+        <div id="hide_show_notes_div" class="btn-group">
+            <a href="{{ route('notes') }}">
+                <i class="fs-4 bi-file-earmark-medical"></i> <span class="ms-1 d-none d-sm-inline">Notes</span> </a>
+            </a>
+        </div>
+    </li>
+<?php 
+    }
+?>
 
 
-                            <!--  -->
-                            <li class="mt-2">
-
-                                <div id="hide_show_opensolar_div" class="btn-group">
-                                    <a href="{{ route('saular') }}">
-                                        <i class="fs-4 bi-file-earmark-medical"></i> <span class="ms-1 d-none d-sm-inline">Notes</span> </a>
-                                    </a>
-                                </div>
-                            </li>
                         </ul>
                     </li>
 
@@ -70,9 +117,17 @@
                     <li>
                         <span class="text-muted">SUPPORT</span>
                         <hr>
-                        <a href="#" class="nav-link px-0 align-middle">
+                        <a href="http://thdigital.com.au/saular-support" class="nav-link px-0 align-middle">
                             <i class="fs-4 bi-file-text"></i> <span class="ms-1 d-none d-sm-inline">KnowledgeBase</span> </a>
                     </li>
                 </ul>
             </div>
-        </div>
+</div>
+
+
+
+
+
+       
+
+

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -28,27 +27,53 @@ class HomeController extends Controller
         //  Getting Current User Email
         $auth_email = Auth::user()->email;
 
+
+
         //  Cheking That Email in OpenSolar User Table and check its subscription
-        $subscription_status_opensolar = DB::connection('opensolar')->table('users')->where('hubspot_email', "=", $auth_email)->get('subscribed');
-
-        $hide_show_opensolar_div = "";
-        $temp_hide_show_opensolar_div = DB::connection('opensolar')->table('users')->where('hubspot_email', "=", $auth_email)->get();
-        if (!$temp_hide_show_opensolar_div) {
-            $hide_show_opensolar_div = "none";
-        }
-
         //  If Subscription is yes we show Installed on App otherwise we show Payment Link
-        if ($subscription_status_opensolar[0]->subscribed == "Yes") {
-            return view('home', [
-                'subscription_status_opensolar' => "Yes",
-                'hide_show_opensolar_div' => $hide_show_opensolar_div
-            ]);
-        } else {
-            return view('home', [
-                'subscription_status_opensolar' => "No",
-                'hide_show_opensolar_div' => $hide_show_opensolar_div
+        //  If Subscription is yes we show Installed on App otherwise we show Payment Link
 
-            ]);
+        // 
+        $subscription_status_opensolar = "";
+        $temp_subscription_status_opensolar = DB::connection('opensolar')->table('users')->where('hubspot_email', "=", $auth_email)->get('subscribed');
+        if (count($temp_subscription_status_opensolar) > 0) {
+            if ($temp_subscription_status_opensolar[0]->subscribed == "Yes") {
+                $subscription_status_opensolar = "Yes";
+            } else {
+                $subscription_status_opensolar = "No";
+            }
+
+        } else {
+            $subscription_status_opensolar = "No";
         }
+
+        //
+        //  
+        $subscription_status_notes = "";
+        $temp_subscription_status_notes = DB::connection('notes')->table('users')->where('email', "=", $auth_email)->get('subscribed');
+
+        if (count($temp_subscription_status_notes) > 0) {
+
+            if ($temp_subscription_status_notes[0]->subscribed == "Yes") {
+
+                $subscription_status_notes = "Yes";
+            } else {
+                $subscription_status_notes = "No";
+            }
+
+        } else {
+            $subscription_status_notes = "No";
+        }
+
+
+
+
+
+        return view('home', [
+            'subscription_status_opensolar' => $subscription_status_opensolar,
+            'subscription_status_notes' => $subscription_status_notes,
+        ]);
+
+
     }
 }
