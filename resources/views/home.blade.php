@@ -1,11 +1,9 @@
 <?php
 echo "<script>var subscription_status_opensolar = '" . $subscription_status_opensolar . "'</script>";
-echo "<script>var hide_show_opensolar_div = '" . $hide_show_opensolar_div . "'</script>";
-
+echo "<script>var subscription_status_notes = '" . $subscription_status_notes . "'</script>";
 ?>
 
 @extends('layouts.app')
-
 @section('content')
 
 <div class="container-fluid">
@@ -37,29 +35,34 @@ echo "<script>var hide_show_opensolar_div = '" . $hide_show_opensolar_div . "'</
                     <div class="card-body">
                         <h5 class="card-title"><b>Notes</b></h5>
                         <p class="card-text">Create custom notes in HubSpot in Workflows using custom action</p>
-                        <a href="#" id="321_stat" class="btn btn-primary">Starting at $199.00/mo</a>
+                        <!-- <a href="#" id="321_stat" class="btn btn-primary">Starting at $199.00/mo</a> -->
+                        <div id="div_notes">
+
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-@endsection
-
 
 <script>
-    window.onload = function abc() {
-
+    window.onload = function xyz() {
+// 
         var div_open_solar = document.getElementById("div_open_solar");
         if (subscription_status_opensolar == "Yes") {
             div_open_solar.innerHTML = '<a href="" class="btn btn-primary">Installed</a>';
         } else {
-            div_open_solar.innerHTML = '<a href="https://thdigital.au/opensolar_app/install/"  class="btn btn-primary">Starting at $199.00/mo</a>';
+            div_open_solar.innerHTML = '<a href="https://thdigital.au/opensolar_app/install/"  class="btn btn-primary">Starting at $30.00/mo</a>';
         }
-
-        // Hide and Show 
-        if (hide_show_opensolar_div == "none") {
-            document.getElementById("hide_show_opensolar_div").style.display = 'none';
-        } 
+// 
+        var div_notes = document.getElementById("div_notes");
+        if (subscription_status_notes == "Yes") {
+            div_notes.innerHTML = '<a href="" class="btn btn-primary">Installed</a>';
+        } else {
+            div_notes.innerHTML = '<a href="https://thdigital.au/opensolar_app/install/"  class="btn btn-primary">Starting at $15.00/mo</a>';
+        }
     }
 </script>
+
+@endsection

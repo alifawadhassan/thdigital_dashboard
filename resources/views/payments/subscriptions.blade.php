@@ -31,8 +31,8 @@
                                 <td><a href="{{ $change_plan_link_opensolar }}">{{ $change_plan_text_opensolar }}</a></td>
                             </tr>
                             <tr>
-                                <td>Billing</td>
-                                <td>Trial Ends Mar 01 2023</td>
+                                <td>Installation URL</td>
+                                <td><a href="https://thdigital.au/opensolar_app/install/">Click here</a></td>
                             </tr>
                             <tr>
                                 <td>HubSpot Status</td>
@@ -57,16 +57,16 @@
                             <tr>
 
                                 <td>Current Plan</td>
-                                <td>Pro</td>
-                                <td><a href="">Change Plan</a></td>
+                                <td>{{ $current_plan_notes}}</td>
+                                <td><a href="{{ $change_plan_link_notes }}">{{ $change_plan_text_notes }}</a></td>
                             </tr>
                             <tr>
-                                <td>Billing</td>
-                                <td>Trial Ends Mar 01 2023</td>
+                                <td>Installation URL</td>
+                                <td><a href="https://thdigital.au/opensolar_app/install/">Click here</a></td>
                             </tr>
                             <tr>
                                 <td>HubSpot Status</td>
-                                <td>Connected</td>
+                                <td>{{ $hubspot_status_notes }}</td>
                             </tr>
                         </tbody>
                     </table>

@@ -1,0 +1,1 @@
+<script>window.location.href = "https://staging.dashboard.thdigital.au/";</script>
